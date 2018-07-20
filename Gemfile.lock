@@ -1,0 +1,53 @@
+PATH
+  remote: .
+  specs:
+    spider (0.1.0)
+      ohm (~> 3.1)
+      typhoeus (~> 1.3)
+
+GEM
+  remote: https://gems.ruby-china.com/
+  specs:
+    diff-lcs (1.3)
+    ethon (0.11.0)
+      ffi (>= 1.3.0)
+    ffi (1.9.25)
+    hiredis (0.6.1)
+    nest (3.1.1)
+      redic
+    ohm (3.1.1)
+      nest (~> 3)
+      redic (~> 1.5.0)
+      stal
+    rake (10.5.0)
+    redic (1.5.0)
+      hiredis
+    rspec (3.7.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+    rspec-core (3.7.1)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.1)
+    stal (0.3.0)
+      redic (~> 1.5)
+    typhoeus (1.3.0)
+      ethon (>= 0.9.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.16)
+  rake (~> 10.0)
+  rspec (~> 3.0)
+  spider!
+
+BUNDLED WITH
+   1.16.3
