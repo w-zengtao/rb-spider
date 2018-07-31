@@ -33,12 +33,18 @@ module Spider
       exec
     end
 
-    # 这里判断是否需要进入数据处理流程
-    def self.hset(url, md5ed = nil)
+    # 判断是否需要进入处理流程
+    def self.need_deal?(url, md5ed)
+      return false if get(url) == md5ed   # 如果没有改变就不需要处理
+      set(url, md5ed)
+      return true
+    end
+
+    def self.set(url, md5ed = nil)
       redis.hset(CTAG_HASH, Digest::MD5.hexdigest(url), md5ed)
     end
 
-    def self.hget(url)
+    def self.get(url)
       redis.hget(CTAG_HASH, Digest::MD5.hexdigest(url))
     end
 
