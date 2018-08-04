@@ -3,8 +3,7 @@ redis:
   port: 6379
   db: 0
 rabbitmq:
-  vhost: 127.0.0.1
+  vhost: "/"
   username: guest
   password: guest
-  port: 5672
-  
+  host: 127.0.0.1

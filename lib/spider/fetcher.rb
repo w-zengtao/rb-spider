@@ -2,8 +2,20 @@ require 'digest'
 
 module Spider
   class Fetcher
-    def initialize(url)
+
+    attr_accessor :client
+
+    def initialize(url = nil)
       @url = url
+    end
+
+    def mq_client(exchange_name = nil)
+      @client ||= MqClient.instance unless exchange_name
+      @client ||= MqClient.new({ exchange_name: exchange_name })
+    end
+
+    def stop
+      @client.stop
     end
 
     def exec
@@ -19,7 +31,7 @@ module Spider
       end
 
       def write_to_middleware
-        
+        puts "need"
       end
   end
 end
