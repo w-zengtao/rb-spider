@@ -3,6 +3,8 @@ require 'digest'
 module Spider
   class Fetcher
 
+    # @client: this instance will delivery message to rabbitmq
+    # so once we fetched response, wo delivery it to rabbitmq through this client
     attr_accessor :client
 
     def initialize(url = nil)
@@ -10,7 +12,7 @@ module Spider
     end
 
     def mq_client(exchange_name = nil)
-      @client ||= MqClient.instance unless exchange_name
+      return @client ||= MqClient.instance unless exchange_name
       @client ||= MqClient.new({ exchange_name: exchange_name })
     end
 
@@ -26,12 +28,13 @@ module Spider
       def parse_resp(resp)
         code, headers, body = resp.code, resp.headers, resp.body
         if Scheduler.need_deal?(@url, Digest::MD5.hexdigest(body))
-          write_to_middleware
+          write_to_middleware(body)
         end
       end
 
-      def write_to_middleware
-        puts "need"
+      def write_to_middleware(message)
+        puts "writing message to rabbitmq ..."
+        mq_client.publish(message)
       end
   end
 end

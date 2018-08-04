@@ -40,7 +40,7 @@ module Spider
       return true
     end
 
-    private
+    # private
       def self.clean
         redis.del(SCHEDULED_POOLS)
       end
