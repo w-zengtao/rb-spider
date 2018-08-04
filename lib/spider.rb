@@ -1,8 +1,4 @@
-require "spider/config"
-require "spider/version"
-require "spider/fetcher"
-require "spider/requester"
-require "spider/scheduler"
+Dir[File.dirname(__FILE__) + "/spider/*.rb"].map { |file| require file }
 
 module Spider
   url = %w(

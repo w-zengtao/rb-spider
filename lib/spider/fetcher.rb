@@ -19,7 +19,7 @@ module Spider
       end
 
       def write_to_middleware
-
+        
       end
   end
 end

@@ -40,17 +40,17 @@ module Spider
       return true
     end
 
-    def self.set(url, md5ed = nil)
-      redis.hset(CTAG_HASH, Digest::MD5.hexdigest(url), md5ed)
-    end
-
-    def self.get(url)
-      redis.hget(CTAG_HASH, Digest::MD5.hexdigest(url))
-    end
-
     private
       def self.clean
         redis.del(SCHEDULED_POOLS)
+      end
+
+      def self.set(url, md5ed = nil)
+        redis.hset(CTAG_HASH, Digest::MD5.hexdigest(url), md5ed)
+      end
+
+      def self.get(url)
+        redis.hget(CTAG_HASH, Digest::MD5.hexdigest(url))
       end
   end
 end
