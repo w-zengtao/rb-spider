@@ -22,7 +22,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+一个基于 Redis + RabbitMQ 的（JSON）爬虫、目前仅使用于我们的数据中心项目
+
+TODO: 多线程池支持
 
 ## Development
 
