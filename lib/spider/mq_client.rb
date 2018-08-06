@@ -8,6 +8,8 @@ module Spider
 
     @@instance = nil
 
+    # opts
+    # opts[:exchange_name] Provide rabbitmq exchange identify, defaulted will be 'spider-default'
     def initialize(opts = {})
       @connection = Bunny.new({
         username: Config.instance.config["rabbitmq"]["username"],
@@ -36,11 +38,5 @@ module Spider
       )
     end
 
-    private
   end
 end
-
-
-# mq_client = Spider::MqClient.new(exchange_name: 'your_exchange_name')
-
-mq_client = Spider::MqClient.new

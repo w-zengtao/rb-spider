@@ -1,45 +1,16 @@
 # Spider
+ [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability) [![codebeat badge](https://codebeat.co/badges/28939564-2b04-4d35-8640-984adf16290d)](https://codebeat.co/projects/github-com-w-zengtao-rb-spider-master) [![Build Status](https://www.travis-ci.org/w-zengtao/rb-spider.svg?branch=master)](https://www.travis-ci.org/w-zengtao/rb-spider)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/spider`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+## Docs
+* [EN](https://github.com/w-zengtao/rb-spider/blob/master/docs/README_CN.md)
+* [中文](https://github.com/w-zengtao/rb-spider/blob/master/docs/README_CN.md)
 
-## Installation
+## Install
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'spider'
+```bash
+gem install spider -s https://github.com/w-zengtao/rb-spider
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install spider
-
-## Usage
-
-一个基于 Redis + RabbitMQ 的（JSON）爬虫、目前仅使用于我们的数据中心项目
-
-TODO: 多线程池支持
-
 ## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/spider. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## License
-
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Spider project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/spider/blob/master/CODE_OF_CONDUCT.md).

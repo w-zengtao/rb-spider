@@ -16,8 +16,9 @@ module Spider
       @client ||= MqClient.new({ exchange_name: exchange_name })
     end
 
+    # stop will stop rabbitmq client if this client is not the Instance one
     def stop
-      @client.stop
+      @client.stop unless @client == MqClient.instance
     end
 
     def exec
