@@ -7,3 +7,16 @@ rabbitmq:
   username: guest
   password: guest
   host: 127.0.0.1
+
+# 下面是任务的描述
+tasks:  
+  -
+    queue_name: dota_series
+    platforms:
+      - vpgame: "http://www.vpgame.com/gateway/v1/match/?page=1&category=dota&status=open&limit=20&lang=zh_CN"
+  -
+    queue_name: dota_odds
+    platforms:
+  -
+    queue_name: lol_series
+    platforms:

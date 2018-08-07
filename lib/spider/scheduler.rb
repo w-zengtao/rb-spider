@@ -21,6 +21,7 @@ module Spider
       )
     end
 
+    # TODO 这里应该是创建 Tasks & 思路演化
     def self.exec
       pools.map { |url| work_pool.queue << Fetcher.new(url) }
     end
@@ -58,11 +59,3 @@ module Spider
       end
   end
 end
-
-
-# Spider::Scheduler.redis
-
-# SortedSort 可以加入优先级处理
-# Set
-
-# Spider::Scheduler.add("http://www.baidu.com")
