@@ -5,15 +5,21 @@ module Spider
   class WorkPool
 
     # Use queue to hold messages & use threads to consume messages
-    attr_accessor :threads, :queue
+    attr_accessor :threads, :queue, :started
 
     def initialize(size = 10)
-      @size = size
+      @size, @started, @queue = size, false, ::Queue.new
+      start
     end
 
     def start
       threads = []
       @size.times { threads << Thread.new(&method(:run_loop)) }
+      @started = true
+    end
+
+    def started?
+      self.started
     end
 
     def stop
@@ -22,7 +28,12 @@ module Spider
 
     private
       def run_loop
+        callable = @queue.pop
+        begin
+          callable.call
+        rescue ::StandardError => error
 
+        end
       end
   end
 end

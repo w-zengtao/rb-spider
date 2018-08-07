@@ -25,6 +25,8 @@ module Spider
       parse_resp(Requester.new(@url).get)
     end
 
+    alias call exec
+
     private
       def parse_resp(resp)
         code, headers, body = resp.code, resp.headers, resp.body

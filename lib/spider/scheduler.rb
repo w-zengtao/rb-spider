@@ -9,6 +9,10 @@ module Spider
     SCHEDULED_POOLS = "scheduled_pools"     # 调度池
     CTAG_HASH       = "ctag_hash"           # 这里存储爬虫上一次数据的签名
 
+    def self.work_pool
+      @work_pool ||= WorkPool.new
+    end
+
     def self.redis
       @redis ||= Redis.new(
         host: Config.instance.config["redis"]["url"],
@@ -18,7 +22,7 @@ module Spider
     end
 
     def self.exec
-      pools.each { |url| Fetcher.new(url).exec }
+      pools.map { |url| work_pool.queue << Fetcher.new(url) }
     end
 
     def self.pools
