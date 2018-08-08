@@ -9,7 +9,7 @@ module Spider
     attr_accessor :config
     
     def initialize
-      @config = YAML.load(File.open(File.expand_path("../../../config.yml", __FILE__)))
+      @config = YAML.load(File.open(File.expand_path("../../../config/config.yml", __FILE__)))
     end
 
     def self.instance
