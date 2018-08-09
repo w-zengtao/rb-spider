@@ -14,3 +14,11 @@ gem install spider -s https://github.com/w-zengtao/rb-spider
 
 ## Development
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+
+## What I am doing ...
+
+* Confused by how to design the `Timer` 
+* Create the `Task` class to extend our mission
+
+By every commit, I record my thinking about evolution of this gem

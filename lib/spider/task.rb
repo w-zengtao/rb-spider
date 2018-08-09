@@ -4,15 +4,28 @@
 module Spider
   class Task
 
-    attr_accessor :type, :queue_name, :url
+    attr_accessor :type, :url, :period, :enable, :params
 
-    def initialize(type = 'json', queue_name = 'default', url)
-      @type, @queue_name, @url = type, queue_name, url
+    # opts
+    # type   : json(default) or xml
+    # enable : true(default) or false
+    # period : fetch url every #{period} seconds
+
+    def initialize(opts = {})
+      @type   = opts.fetch('type', 'json')
+      @url    = opts.fetch('url', nil)
+      @period = opts.fetch('period', 60)
+      @enable = opts.fetch('enable', true)
+      @params = opts.fetch('params', nil)
     end
 
-    def call
+    def exec
       Fetcher.new(@url).call
     end
+    alias call exec
 
   end
 end
+
+# @queue_name = opts.fetch('queue_name', 'spider-task-default')
+# JSON 的话严格上来说只是读取 APi 还需要 APi的查询参数蔡比较合理

@@ -11,12 +11,9 @@ rabbitmq:
 # 下面是任务的描述
 tasks:  
   -
-    queue_name: dota_series
-    platforms:
-      - vpgame: "http://www.vpgame.com/gateway/v1/match/?page=1&category=dota&status=open&limit=20&lang=zh_CN"
-  -
-    queue_name: dota_odds
-    platforms:
-  -
-    queue_name: lol_series
-    platforms:
+    type: json
+    url: 'http://league.vpgame.com/das/data/schedule/allGameSchedule?is_all=false&interval=3&game_type=dota'
+    period: 60
+    enable: true
+    params:
+      date: date        # key date & type date

@@ -1,12 +1,17 @@
 Dir[File.dirname(__FILE__) + "/spider/*.rb"].map { |file| require file }
 
-module Spider
-  # url = %w(
-  #   https://dataservice-sec.vpgame.com/dota2/pro/webservice/schedule/list/all?lang=cn&interval=7&game_type=lol&status=wait
-  # )
-  # Scheduler.add(url)
+require 'pry'
 
-  # def run
-  #
-  # end
+module Spider
+  def self.load_tasks
+    @tasks = []
+    Config.instance.config["tasks"].each { |task| @tasks << Task.new(task) }
+    return @tasks
+  end
+
+  def self.tasks
+    return @tasks
+  end
 end
+
+Spider.load_tasks

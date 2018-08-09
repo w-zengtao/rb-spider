@@ -7,6 +7,7 @@
 /spec/reports/
 /tmp/
 /lib/spider/test_code.rb
+.vscode/*
 
 # rspec failure tracking
 .rspec_status

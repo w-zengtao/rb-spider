@@ -9,6 +9,7 @@ module Spider
     SCHEDULED_POOLS = "scheduled_pools"     # 调度池
     CTAG_HASH       = "ctag_hash"           # 这里存储爬虫上一次数据的签名
 
+  # ----------------- Call Basic Tools -----------------
     def self.work_pool
       @work_pool ||= WorkPool.new
     end
@@ -20,6 +21,7 @@ module Spider
         db:   Config.instance.config["redis"]["db"]
       )
     end
+  # ----------------- Call Basic Tools End -----------------
 
     # TODO 这里应该是创建 Tasks & 思路演化
     def self.exec
