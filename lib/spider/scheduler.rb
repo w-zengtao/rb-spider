@@ -1,27 +1,21 @@
 # Scheduler
 # 调度器，这里池里拿取等待请求的数据 & 分发处理抓取的数据
-
-require "redis"
+require_relative "util"
 
 module Spider
   module Scheduler
-
+    
     SCHEDULED_POOLS = "scheduled_pools"     # 调度池
-    CTAG_HASH       = "ctag_hash"           # 这里存储爬虫上一次数据的签名
+    CTAG_HASH = "ctag_hash"           # 这里存储爬虫上一次数据的签名
+    
+    self.extend Util
 
-  # ----------------- Call Basic Tools -----------------
+    # ----------------- Call Basic Tools -----------------
     def self.work_pool
       @work_pool ||= WorkPool.new
     end
-
-    def self.redis
-      @redis ||= Redis.new(
-        host: Config.instance.config["redis"]["url"],
-        port: Config.instance.config["redis"]["port"],
-        db:   Config.instance.config["redis"]["db"]
-      )
-    end
-  # ----------------- Call Basic Tools End -----------------
+    
+    # ----------------- Call Basic Tools End -----------------
 
     # TODO 这里应该是创建 Tasks & 思路演化
     def self.exec
@@ -48,16 +42,16 @@ module Spider
     end
 
     # private
-      def self.clean
-        redis.del(SCHEDULED_POOLS)
-      end
+    def self.clean
+      redis.del(SCHEDULED_POOLS)
+    end
 
-      def self.set(url, md5ed = nil)
-        redis.hset(CTAG_HASH, Digest::MD5.hexdigest(url), md5ed)
-      end
+    def self.set(url, md5ed = nil)
+      redis.hset(CTAG_HASH, Digest::MD5.hexdigest(url), md5ed)
+    end
 
-      def self.get(url)
-        redis.hget(CTAG_HASH, Digest::MD5.hexdigest(url))
-      end
+    def self.get(url)
+      redis.hget(CTAG_HASH, Digest::MD5.hexdigest(url))
+    end
   end
 end

@@ -23,3 +23,9 @@ module Spider
 end
 
 Spider.load_tasks
+Spider::Timer.new
+
+loop do  
+  puts "#{Thread.current.to_s}"
+  sleep(3)
+end
