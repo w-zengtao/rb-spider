@@ -7,8 +7,8 @@ module Spider
     # so once we fetched response, wo delivery it to rabbitmq through this client
     attr_accessor :client
 
-    def initialize(url = nil)
-      @url = url
+    def initialize(url = nil, type = 'json')
+      @url, @type = url, type
     end
 
     def mq_client(exchange_name = nil)

@@ -19,6 +19,25 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## What I am doing ...
 
 * Confused by how to design the `Timer` 
+
+  ```ruby
+  # it seems that this is not a good way
+ 
+  def interval seconds
+    loop do
+      sleep seconds
+    end
+  end
+
+  interval do
+    puts 'the code'
+  end
+  ```
+
+  ```ruby
+  # And then use a thread to polling redis seems good
+  ```
+
 * Create the `Task` class to extend our mission
 
 By every commit, I record my thinking about evolution of this gem

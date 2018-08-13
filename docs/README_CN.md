@@ -59,3 +59,4 @@ rabbitmq:
 
 1. Ruby的 [单例模式](https://github.com/w-zengtao/rb-spider/blob/master/lib/spider/config.rb)
 2. Ruby的 [线程池 - 也就是CPU资源池](https://github.com/w-zengtao/rb-spider/blob/master/lib/spider/work_pool.rb)
+3. 利用轮询设计的 [定时器](https://github.com/w-zengtao/rb-spider/blob/master/lib/spider/timer.rb)

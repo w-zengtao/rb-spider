@@ -4,7 +4,7 @@
 module Spider
   class Task
 
-    attr_accessor :type, :url, :period, :enable, :params
+    attr_accessor :id, :type, :url, :period, :enable, :params
 
     # opts
     # type   : json(default) or xml
@@ -17,13 +17,13 @@ module Spider
       @period = opts.fetch('period', 60)
       @enable = opts.fetch('enable', true)
       @params = opts.fetch('params', nil)
+      @id     = self.object_id
     end
 
     def exec
       Fetcher.new(@url).call
     end
     alias call exec
-
   end
 end
 
