@@ -10,15 +10,11 @@ module Spider
 
     TIMER_STORE_KEY = "spider-timer"
     POLLING_TIME = 5
-    
+
     attr_reader :thread
 
     def initialize
       @thread = Thread.new(&method(:run_loop))
-    end
-
-    def join(timeout = nil)
-      thread.join(timeout)
     end
 
     def set(object_id, next_time)
@@ -28,18 +24,14 @@ module Spider
     # private
     def run_loop
       loop do
-        puts "#{thread.to_s}"
         jobs.each_pair { |key, value| push_to_queue(key) if Time.now.to_i > value.to_i }
         sleep(POLLING_TIME)
       end
     end
 
     def push_to_queue(object_id = nil)
-      puts object_id
-      task = ::Spider.tasks[object_id]
-      Proc.new {
-        puts "abcabc"
-      }.call if task
+      task = load_task_by_id(object_id)
+      Proc.new { Scheduler.add(task) }.call if task
     end
 
     def jobs
@@ -47,6 +39,7 @@ module Spider
     end
 
     def load_task_by_id(object_id)
+      ::Spider.tasks[object_id]
     end
   end
 end

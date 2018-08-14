@@ -18,6 +18,10 @@ module Spider
       @started = true
     end
 
+    def add(task = nil)
+      self.queue << task
+    end
+
     def started?
       self.started
     end

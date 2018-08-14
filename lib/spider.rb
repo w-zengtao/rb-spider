@@ -1,11 +1,15 @@
 Dir[File.dirname(__FILE__) + "/spider/*.rb"].map { |file| require file }
 
-require 'pry'
-
 module Spider
+  self.extend Util
 
-  def start
-    
+  def self.start
+    clean
+    load_tasks.each_key { |key| redis.hset(Timer::TIMER_STORE_KEY, key, Time.now.to_i) }
+  end
+
+  def self.clean
+    redis.del(Timer::TIMER_STORE_KEY)
   end
 
   def self.load_tasks
@@ -22,10 +26,8 @@ module Spider
   end
 end
 
-Spider.load_tasks
-Spider::Timer.new
+Spider.start
+# timer = Spider::Timer.new
 
-loop do  
-  puts "#{Thread.current.to_s}"
-  sleep(3)
-end
+
+# 定时器会定时把任务 分发给 调度器 & 调度器会把任务分发至 队列

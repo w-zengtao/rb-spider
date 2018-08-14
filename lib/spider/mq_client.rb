@@ -38,5 +38,11 @@ module Spider
       )
     end
 
+    def configs
+      {
+        
+      }
+    end
+
   end
 end
