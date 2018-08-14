@@ -9,5 +9,16 @@ module Spider
         db: Config.instance.config["redis"]["db"],
       )
     end
+
+    private
+      def load_task_by_id(object_id)
+        ::Spider.tasks[object_id]
+      end
+
+      def configs
+        {
+
+        }
+      end
   end
 end

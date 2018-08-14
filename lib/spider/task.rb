@@ -12,16 +12,16 @@ module Spider
     # period : fetch url every #{period} seconds
 
     def initialize(opts = {})
-      @type   = opts.fetch('type', 'json')
-      @url    = opts.fetch('url', nil)
-      @period = opts.fetch('period', 60)
-      @enable = opts.fetch('enable', true)
-      @params = opts.fetch('params', nil)
-      @id     = self.object_id
+      self.type   = opts.fetch('type', 'json')
+      self.url    = opts.fetch('url', nil)
+      self.period = opts.fetch('period', 60)
+      self.enable = opts.fetch('enable', true)
+      self.params = opts.fetch('params', nil)
+      self.id     = self.object_id
     end
 
     def exec
-      Fetcher.new(@url).call
+      Fetcher.new(url).call
     end
     alias call exec
   end

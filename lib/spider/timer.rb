@@ -1,6 +1,11 @@
 # User Story
 # 定时器应该是一个线程 & 这个线程应该在不停的轮询
 # 会读取 Redis 里面的Task 如果满足时间要求就 Push 进去队列
+# Hash - key: object_id & value : next_time
+
+# Every 5 seconds、it reads tasks from redis and compare the current time and the scheduled time of the task
+# Push task to Scheduler if it satisfy the time rule
+
 
 require_relative "util"
 
@@ -31,20 +36,13 @@ module Spider
 
     def push_to_queue(object_id = nil)
       task = load_task_by_id(object_id)
-      Proc.new { Scheduler.add(task) }.call if task
+      Scheduler.add(task) if task
     end
 
     def jobs
       redis.hgetall(TIMER_STORE_KEY)
     end
 
-    def load_task_by_id(object_id)
-      ::Spider.tasks[object_id]
-    end
   end
 end
 
-# Every 5 seconds、it reads tasks from redis and compare the current time and the scheduled time of the task
-# Push task to Scheduler if it satisfy the time rule
-
-# Hash - key: object_id & value : next_time

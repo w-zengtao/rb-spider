@@ -38,11 +38,12 @@ module Spider
       )
     end
 
-    def configs
-      {
-        
-      }
-    end
+    private
+      def configs
+        {
+          
+        }
+      end
 
   end
 end

@@ -4,26 +4,31 @@ module Spider
   self.extend Util
 
   def self.start
-    clean
-    load_tasks.each_key { |key| redis.hset(Timer::TIMER_STORE_KEY, key, Time.now.to_i) }
-  end
-
-  def self.clean
-    redis.del(Timer::TIMER_STORE_KEY)
-  end
-
-  def self.load_tasks
-    @tasks = {}
-    Config.instance.config["tasks"].each do |task|
-      t = Task.new(task)
-      @tasks[t.id.to_s] = t
-    end
-    return @tasks
+    clean_previous_cache
+    load_to_cache
   end
 
   def self.tasks
     return @tasks
   end
+
+  private
+    def self.load_to_cache
+      load_tasks.each_key { |key| redis.hset(Timer::TIMER_STORE_KEY, key, Time.now.to_i) }
+    end
+
+    def self.clean_previous_cache
+      redis.del(Timer::TIMER_STORE_KEY)
+    end
+
+    def self.load_tasks
+      @tasks = {}
+      Config.instance.config["tasks"].each do |task|
+        t = Task.new(task)
+        @tasks[t.id.to_s] = t
+      end
+      return @tasks
+    end
 end
 
 Spider.start
