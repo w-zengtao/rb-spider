@@ -13,6 +13,7 @@ module Spider
   end
 
   private
+    # init tasks to Timer
     def self.load_to_cache
       load_tasks.each_key { |key| redis.hset(Timer::TIMER_STORE_KEY, key, Time.now.to_i) }
     end
@@ -23,7 +24,7 @@ module Spider
 
     def self.load_tasks
       @tasks = {}
-      Config.instance.config["tasks"].each do |task|
+      Config.tasks.each do |task|
         t = Task.new(task)
         @tasks[t.id.to_s] = t
       end

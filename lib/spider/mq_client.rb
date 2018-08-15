@@ -12,10 +12,10 @@ module Spider
     # opts[:exchange_name] Provide rabbitmq exchange identify, defaulted will be 'spider-default'
     def initialize(opts = {})
       @connection = Bunny.new({
-        username: Config.instance.config["rabbitmq"]["username"],
-        password: Config.instance.config["rabbitmq"]["password"],
-        vhost:    Config.instance.config["rabbitmq"]["vhost"],
-        host:     Config.instance.config["rabbitmq"]["host"]
+        username: Config.rabbitmq["username"],
+        password: Config.rabbitmq["password"],
+        vhost:    Config.rabbitmq["vhost"],
+        host:     Config.rabbitmq["host"]
       })
       @connection.start
 
@@ -41,7 +41,7 @@ module Spider
     private
       def configs
         {
-          
+
         }
       end
 

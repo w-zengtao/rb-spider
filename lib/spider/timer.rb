@@ -22,27 +22,32 @@ module Spider
       @thread = Thread.new(&method(:run_loop))
     end
 
-    def set(object_id, next_time)
-      redis.hset(TIMER_STORE_KEY, object_id, next_time)
-    end
-
-    # private
-    def run_loop
-      loop do
-        jobs.each_pair { |key, value| push_to_queue(key) if Time.now.to_i > value.to_i }
-        sleep(POLLING_TIME)
+    private
+      def run_loop
+        loop do
+          jobs.each_pair { |key, value| push_to_queue(key) if Time.now.to_i > value.to_i }
+          sleep(POLLING_TIME)
+        end
       end
-    end
 
-    def push_to_queue(object_id = nil)
-      task = load_task_by_id(object_id)
-      Scheduler.add(task) if task
-    end
+      def set(object_id, next_time)
+        redis.hset(TIMER_STORE_KEY, object_id, next_time)
+      end
 
-    def jobs
-      redis.hgetall(TIMER_STORE_KEY)
-    end
+      def push_to_queue(object_id = nil)
+        load_task_by_id(object_id) do |task|
+          Scheduler.add(task)
+          reset_time_by_task(task)
+        end
+      end
 
+      def jobs
+        redis.hgetall(TIMER_STORE_KEY)
+      end
+
+      def reset_time_by_task(task)
+        puts "Reset task: #{task.id} scheduler time to #{Time.at(Time.now.to_i + task.period)} ..."
+        set(task.id, Time.now.to_i + task.period)
+      end
   end
 end
-

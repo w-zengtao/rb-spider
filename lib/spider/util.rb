@@ -4,15 +4,17 @@ module Spider
   module Util
     def redis
       @redis ||= Redis.new(
-        host: Config.instance.config["redis"]["url"],
-        port: Config.instance.config["redis"]["port"],
-        db: Config.instance.config["redis"]["db"],
+        host: Config.redis["url"],
+        port: Config.redis["port"],
+        db:   Config.redis["db"]
       )
     end
 
     private
-      def load_task_by_id(object_id)
-        ::Spider.tasks[object_id]
+      def load_task_by_id(object_id, &block)
+        task = ::Spider.tasks[object_id]
+        yield task if block_given?
+        return task
       end
 
       def configs
