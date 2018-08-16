@@ -9,11 +9,11 @@ rabbitmq:
   host: 127.0.0.1
 
 # 下面是任务的描述
-tasks:  
+tasks:
   -
     type: json
     url: 'http://league.vpgame.com/das/data/schedule/allGameSchedule?is_all=false&interval=3&game_type=dota'
-    period: 10
+    period: 1
     enable: true
     params:
       date: date        # key date & type date

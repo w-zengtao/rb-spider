@@ -32,7 +32,7 @@ module Spider
     end
 end
 
-Spider.start
+# Spider.start
 # timer = Spider::Timer.new
 
 

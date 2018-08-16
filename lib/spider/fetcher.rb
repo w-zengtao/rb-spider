@@ -36,7 +36,6 @@ module Spider
       end
 
       def write_to_middleware(message)
-        puts "writing message to rabbitmq ..."
         mq_client.publish(message)
       end
   end

@@ -1,42 +1,35 @@
-# 这里想引入多线程抓取 & TODO
-# which means we fetch url async through thread pools & but mq client is the only 'key'(resource or ConditionVariable)
+# We fetch url async through thread pools & but mq client is the only 'key'(resource or ConditionVariable)
 
 module Spider
   class WorkPool
 
-    # Use queue to hold messages & use threads to consume messages
-    attr_accessor :threads, :queue, :started
+    @@instance = nil
 
-    def initialize(size = 10)
-      @size, @started, @queue = size, false, ::Queue.new
-      start
+    # Use queue to hold messages & use threads to consume messages
+    attr_accessor :threads, :queue
+
+    def initialize(size = 2)
+      @queue, @threads = ::Queue.new, Array.new
+      size.times { @threads << Thread.new(&:run_loop) }
     end
 
-    def start
-      threads = []
-      @size.times { threads << Thread.new(&method(:run_loop)) }
-      @started = true
+    def self.instance
+      @@instance ||= self.new
     end
 
     def add(task = nil)
-      self.queue << task
-    end
-
-    def started?
-      self.started
-    end
-
-    def stop
-
+      @queue << task
     end
 
     private
       def run_loop
-        callable = @queue.pop
-        begin
-          callable.call
-        rescue ::StandardError => error
-
+        loop do
+          begin
+            @queue.pop.call if @queue.size > 1
+          rescue ::StandardError => e
+            puts e.class.name
+            puts e.message
+          end
         end
       end
   end

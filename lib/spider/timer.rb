@@ -46,7 +46,6 @@ module Spider
       end
 
       def reset_time_by_task(task)
-        puts "Reset task: #{task.id} scheduler time to #{Time.at(Time.now.to_i + task.period)} ..."
         set(task.id, Time.now.to_i + task.period)
       end
   end

@@ -11,12 +11,11 @@ module Spider
 
     # ----------------- Call Basic Tools -----------------
     def self.work_pool
-      @work_pool ||= WorkPool.new
+      WorkPool.instance
     end
 
     # ----------------- Call Basic Tools End -----------------
     def self.add(task = nil)
-      puts "Scheduler is adding task..."
       work_pool.add(task)
     end
 
@@ -37,3 +36,6 @@ module Spider
       end
   end
 end
+
+
+# Spider::Scheduler.work_pool
