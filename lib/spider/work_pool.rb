@@ -23,14 +23,7 @@ module Spider
 
     private
       def run_loop
-        loop do
-          begin
-            @queue.pop.call if @queue.size > 1
-          rescue ::StandardError => e
-            puts e.class.name
-            puts e.message
-          end
-        end
+        loop { (@queue.pop.call if @queue.size > 1) rescue nil }
       end
   end
 end
