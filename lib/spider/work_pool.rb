@@ -10,7 +10,7 @@ module Spider
 
     def initialize(size = 2)
       @queue, @threads = ::Queue.new, Array.new
-      size.times { @threads << Thread.new(&:run_loop) }
+      size.times { @threads << Thread.new(&method(:run_loop)) }
     end
 
     def self.instance
